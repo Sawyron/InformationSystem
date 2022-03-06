@@ -1,6 +1,7 @@
 ﻿using InformationSystem.Models;
 using InformationSystem.Services;
 using InformationSystem.Views;
+using System.Data.Odbc;
 
 namespace InformationSystem.Controllers
 {
@@ -18,7 +19,46 @@ namespace InformationSystem.Controllers
 
             _connectionView.OnSave += connectionView_OnSave;
             _connectionView.OnViewLoad += _connectionView_OnViewLoad;
+            _connectionView.OnOpenConnection += _connectionView_OnOpenConnection;
+            _connectionView.OnCloseConnection += _connectionView_OnCloseConnection;
         }
+
+        private void _connectionView_OnOpenConnection(object? sender, EventArgs e)
+        {
+            bool result = false;
+            try
+            {
+                result = _connection.OpenConnection();
+            }
+            catch(OdbcException ex)
+            {
+                _messageService.ShowError(ex.Message);
+            }
+            if (result)
+            {
+                _connectionView.CloseButtonEnabled = true;
+                _connectionView.OpenButtonEnabled = false;
+                _connectionView.ConnectionState = "Connection opened";
+            }
+            else
+            {
+                _connectionView.ConnectionState = "Connection opening error";
+            }
+        }
+        private void _connectionView_OnCloseConnection(object? sender, EventArgs e)
+        {
+            if (_connection.CloseConnectin())
+            {
+                _connectionView.CloseButtonEnabled = false;
+                _connectionView.OpenButtonEnabled = true;
+                _connectionView.ConnectionState = "Connection closed";
+            }
+            else
+            {
+                _connectionView.ConnectionState = "Connection closing error";
+            }
+        }
+
 
         private void _connectionView_OnViewLoad(object? sender, EventArgs e)
         {
@@ -39,6 +79,7 @@ namespace InformationSystem.Controllers
                 _connection.User = _connectionView.User;
                 _connection.Password = _connectionView.Password;
                 _connection.DataBase = _connectionView.DataBase;
+                _connectionView.ConnectionState = "Connection data saved";
             }
             catch (FormatException ex)
             {

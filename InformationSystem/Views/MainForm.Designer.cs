@@ -39,8 +39,9 @@
             this._passwordTextBox = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.saveButton = new System.Windows.Forms.Button();
-            this.openConnectionButton = new System.Windows.Forms.Button();
-            this.closeConnectionButton = new System.Windows.Forms.Button();
+            this._openConnectionButton = new System.Windows.Forms.Button();
+            this._closeConnectionButton = new System.Windows.Forms.Button();
+            this._stateLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // _serverTextBox
@@ -131,7 +132,8 @@
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(29, 333);
+            this.saveButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveButton.Location = new System.Drawing.Point(29, 337);
             this.saveButton.Name = "saveButton";
             this.saveButton.Size = new System.Drawing.Size(100, 23);
             this.saveButton.TabIndex = 10;
@@ -140,35 +142,49 @@
             this.saveButton.UseVisualStyleBackColor = true;
             this.saveButton.Click += new System.EventHandler(this.OnSaveClick);
             // 
-            // openConnectionButton
+            // _openConnectionButton
             // 
-            this.openConnectionButton.Location = new System.Drawing.Point(29, 387);
-            this.openConnectionButton.Name = "openConnectionButton";
-            this.openConnectionButton.Size = new System.Drawing.Size(100, 23);
-            this.openConnectionButton.TabIndex = 11;
-            this.openConnectionButton.TabStop = false;
-            this.openConnectionButton.Text = "Open";
-            this.openConnectionButton.UseVisualStyleBackColor = true;
-            this.openConnectionButton.Click += new System.EventHandler(this.OnOpenClick);
+            this._openConnectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this._openConnectionButton.Location = new System.Drawing.Point(29, 399);
+            this._openConnectionButton.Name = "_openConnectionButton";
+            this._openConnectionButton.Size = new System.Drawing.Size(100, 23);
+            this._openConnectionButton.TabIndex = 11;
+            this._openConnectionButton.TabStop = false;
+            this._openConnectionButton.Text = "Open";
+            this._openConnectionButton.UseVisualStyleBackColor = true;
+            this._openConnectionButton.Click += new System.EventHandler(this.OnOpenClick);
             // 
-            // closeConnectionButton
+            // _closeConnectionButton
             // 
-            this.closeConnectionButton.Location = new System.Drawing.Point(169, 387);
-            this.closeConnectionButton.Name = "closeConnectionButton";
-            this.closeConnectionButton.Size = new System.Drawing.Size(100, 23);
-            this.closeConnectionButton.TabIndex = 12;
-            this.closeConnectionButton.TabStop = false;
-            this.closeConnectionButton.Text = "Close";
-            this.closeConnectionButton.UseVisualStyleBackColor = true;
-            this.closeConnectionButton.Click += new System.EventHandler(this.OnCloseClick);
+            this._closeConnectionButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this._closeConnectionButton.Enabled = false;
+            this._closeConnectionButton.Location = new System.Drawing.Point(169, 399);
+            this._closeConnectionButton.Name = "_closeConnectionButton";
+            this._closeConnectionButton.Size = new System.Drawing.Size(100, 23);
+            this._closeConnectionButton.TabIndex = 12;
+            this._closeConnectionButton.TabStop = false;
+            this._closeConnectionButton.Text = "Close";
+            this._closeConnectionButton.UseVisualStyleBackColor = true;
+            this._closeConnectionButton.Click += new System.EventHandler(this.OnCloseClick);
+            // 
+            // _stateLabel
+            // 
+            this._stateLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this._stateLabel.AutoSize = true;
+            this._stateLabel.Location = new System.Drawing.Point(169, 345);
+            this._stateLabel.Name = "_stateLabel";
+            this._stateLabel.Size = new System.Drawing.Size(119, 15);
+            this._stateLabel.TabIndex = 13;
+            this._stateLabel.Text = "Connection is not set";
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.closeConnectionButton);
-            this.Controls.Add(this.openConnectionButton);
+            this.Controls.Add(this._stateLabel);
+            this.Controls.Add(this._closeConnectionButton);
+            this.Controls.Add(this._openConnectionButton);
             this.Controls.Add(this.saveButton);
             this.Controls.Add(this.label5);
             this.Controls.Add(this._passwordTextBox);
@@ -201,7 +217,8 @@
         private TextBox _passwordTextBox;
         private Label label5;
         private Button saveButton;
-        private Button openConnectionButton;
-        private Button closeConnectionButton;
+        private Button _openConnectionButton;
+        private Button _closeConnectionButton;
+        private Label _stateLabel;
     }
 }

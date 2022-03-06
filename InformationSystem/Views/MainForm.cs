@@ -11,6 +11,9 @@
         public string DataBase { get => _databaseTextBox.Text; set => _databaseTextBox.Text = value; }
         public string User { get => _userTextBox.Text; set => _userTextBox.Text = value; }
         public string Password { get => _passwordTextBox.Text; set => _passwordTextBox.Text = value; }
+        public string ConnectionState { get => _stateLabel.Text; set => _stateLabel.Text = value; }
+        public bool OpenButtonEnabled { get => _openConnectionButton.Enabled; set => _openConnectionButton.Enabled = value; }
+        public bool CloseButtonEnabled { get => _closeConnectionButton.Enabled; set => _closeConnectionButton.Enabled = value; }
 
         public event EventHandler? OnSave;
         public event EventHandler? OnOpenConnection;
