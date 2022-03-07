@@ -19,7 +19,8 @@ namespace InformationSystem
             MainForm form = new MainForm();
             MessageService messageService = new MessageService();
             OdbcConnectionString connection = new OdbcConnectionString(string.Empty, "postgres", string.Empty);
-            ConnectionController controller = new ConnectionController(connection, form, messageService);
+            TitleService titleService = new TitleService();
+            ConnectionController controller = new ConnectionController(connection, form, messageService, titleService);
             Application.Run(form);
         }
     }

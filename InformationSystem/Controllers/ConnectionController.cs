@@ -10,18 +10,27 @@ namespace InformationSystem.Controllers
         private IConnectionView _connectionView;
         private IConnectionString _connectionString;
         private IMessageService _messageService;
+        private ITitleService _titleService;
         private OdbcConnection? _connection;
 
-        public ConnectionController(IConnectionString connection, IConnectionView connectionView, IMessageService messageService)
+        public ConnectionController(IConnectionString connection, IConnectionView connectionView, IMessageService messageService, ITitleService titleService)
         {
             _connectionString = connection;
             _connectionView = connectionView;
             _messageService = messageService;
+            _titleService = titleService;
 
             _connectionView.OnSave += connectionView_OnSave;
             _connectionView.OnViewLoad += _connectionView_OnViewLoad;
             _connectionView.OnOpenConnection += _connectionView_OnOpenConnection;
             _connectionView.OnCloseConnection += _connectionView_OnCloseConnection;
+            _connectionView.OnSelect += _connectionView_OnSelect;
+        }
+
+        private void _connectionView_OnSelect(object? sender, EventArgs e)
+        {
+            _titleService.DbConnection = _connection;
+            _connectionView.ShowTitles(_titleService.GetAll());
         }
 
         private void _connectionView_OnOpenConnection(object? sender, EventArgs e)

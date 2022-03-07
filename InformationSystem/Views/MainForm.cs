@@ -1,4 +1,6 @@
-﻿namespace InformationSystem.Views
+﻿using InformationSystem.Models;
+
+namespace InformationSystem.Views
 {
     public partial class MainForm : Form, IConnectionView
     {
@@ -17,6 +19,7 @@
         public event EventHandler? OnOpenConnection;
         public event EventHandler? OnCloseConnection;
         public event EventHandler? OnViewLoad;
+        public event EventHandler? OnSelect;
 
         private void OnSaveClick(object sender, EventArgs e)
         {
@@ -42,12 +45,48 @@
         {
             _openConnectionButton.Enabled = false;
             _closeConnectionButton.Enabled = true;
+            _selectButton.Enabled = true;
+            _selectButton.Enabled = true;
+            SetDataTextBoxesEnabled(false);
         }
 
         public void SetClosedState()
         {
             _openConnectionButton.Enabled = true;
             _closeConnectionButton.Enabled = false;
+            _selectButton.Enabled = false;
+            _saveButton.Enabled = false;
+            SetDataTextBoxesEnabled(true);
+        }
+
+        private void SetDataTextBoxesEnabled(bool enebled)
+        {
+            foreach (Control control in _dataPanel.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Enabled = enebled;
+                }
+            }
+        }
+
+        public void ShowTitles(IEnumerable<Title> titles)
+        {
+            _queryTextBox.Text = "";
+            foreach (Title title in titles)
+            {
+                _queryTextBox.Text += title.ToString() + "\n";
+            }
+        }
+
+        private void _selectButton_Click(object sender, EventArgs e)
+        {
+            OnSelect?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void _stateLabel_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
