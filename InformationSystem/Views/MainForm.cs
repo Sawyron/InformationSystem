@@ -12,8 +12,6 @@
         public string User { get => _userTextBox.Text; set => _userTextBox.Text = value; }
         public string Password { get => _passwordTextBox.Text; set => _passwordTextBox.Text = value; }
         public string ConnectionState { get => _stateLabel.Text; set => _stateLabel.Text = value; }
-        public bool OpenButtonEnabled { get => _openConnectionButton.Enabled; set => _openConnectionButton.Enabled = value; }
-        public bool CloseButtonEnabled { get => _closeConnectionButton.Enabled; set => _closeConnectionButton.Enabled = value; }
 
         public event EventHandler? OnSave;
         public event EventHandler? OnOpenConnection;
@@ -38,6 +36,18 @@
         private void OnFormLoad(object sender, EventArgs e)
         {
             OnViewLoad?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void SetOpenedState()
+        {
+            _openConnectionButton.Enabled = false;
+            _closeConnectionButton.Enabled = true;
+        }
+
+        public void SetClosedState()
+        {
+            _openConnectionButton.Enabled = true;
+            _closeConnectionButton.Enabled = false;
         }
     }
 }
