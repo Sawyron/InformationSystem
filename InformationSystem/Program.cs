@@ -16,11 +16,18 @@ namespace InformationSystem
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            MainForm form = new MainForm();
-            MessageService messageService = new MessageService();
-            OdbcConnectionString connection = new OdbcConnectionString(string.Empty, "postgres", string.Empty);
-            TitleService titleService = new TitleService();
-            ConnectionController controller = new ConnectionController(connection, form, messageService, titleService);
+
+            ConnectionView connectionView = new ConnectionView();
+            ConnectionController connectionController = new ConnectionController(
+                new OdbcConnectionString(string.Empty, "postgres", string.Empty),
+                connectionView,
+                new MessageService());
+
+            RichTextBoxView textBoxView = new RichTextBoxView();
+            RichTextBoxController richTextBoxController = new RichTextBoxController(new TitleService(), textBoxView);
+
+            MainForm form = new MainForm(connectionView, textBoxView);
+            MainController mainController = new MainController(form, new MessageService(), connectionController, richTextBoxController);
             Application.Run(form);
         }
     }

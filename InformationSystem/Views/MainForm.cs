@@ -1,92 +1,50 @@
-﻿using InformationSystem.Models;
-
-namespace InformationSystem.Views
+﻿namespace InformationSystem.Views
 {
-    public partial class MainForm : Form, IConnectionView
+    public partial class MainForm : Form, IMainView
     {
-        public MainForm()
+        private UserControl _connectionControl;
+        private UserControl _richTextBoxControl;
+        public MainForm(UserControl connectionControl, UserControl richTextBoxControl)
         {
             InitializeComponent();
-        }
-        public string Server { get => _serverTextBox.Text; set => _serverTextBox.Text = value; }
-        public string Port { get => _portTextBox.Text; set => _portTextBox.Text = value; }
-        public string DataBase { get => _databaseTextBox.Text; set => _databaseTextBox.Text = value; }
-        public string User { get => _userTextBox.Text; set => _userTextBox.Text = value; }
-        public string Password { get => _passwordTextBox.Text; set => _passwordTextBox.Text = value; }
-        public string ConnectionState { get => _stateLabel.Text; set => _stateLabel.Text = value; }
-
-        public event EventHandler? OnSave;
-        public event EventHandler? OnOpenConnection;
-        public event EventHandler? OnCloseConnection;
-        public event EventHandler? OnViewLoad;
-        public event EventHandler? OnSelect;
-
-        private void OnSaveClick(object sender, EventArgs e)
-        {
-            OnSave?.Invoke(this, EventArgs.Empty);
+            _connectionControl = connectionControl;
+            _richTextBoxControl = richTextBoxControl;
         }
 
-        private void OnOpenClick(object sender, EventArgs e)
+        public event EventHandler? OnConnectionClick;
+        public event EventHandler? OnRichTextBoxClick;
+        public event EventHandler? OnViewClosing;
+
+        public void SetConnectionView()
         {
-            OnOpenConnection?.Invoke(this, EventArgs.Empty);
+            SetUserControl(_connectionControl);
         }
 
-        private void OnCloseClick(object sender, EventArgs e)
+        public void SetRichTextBoxView()
         {
-            OnCloseConnection?.Invoke(this, EventArgs.Empty);
+            SetUserControl(_richTextBoxControl);
         }
 
-        private void OnFormLoad(object sender, EventArgs e)
+        private void SetUserControl(UserControl control)
         {
-            OnViewLoad?.Invoke(this, EventArgs.Empty);
+            _containerPanel.Controls.Clear();
+            control.Dock = DockStyle.Fill;
+            _containerPanel.Controls.Add(control);
         }
 
-        public void SetOpenedState()
+        private void _connectionButton_Click(object sender, EventArgs e)
         {
-            _openConnectionButton.Enabled = false;
-            _closeConnectionButton.Enabled = true;
-            _selectButton.Enabled = true;
-            _selectButton.Enabled = true;
-            SetDataTextBoxesEnabled(false);
+            OnConnectionClick?.Invoke(this, EventArgs.Empty);
         }
 
-        public void SetClosedState()
+        private void _richTextBox_Click(object sender, EventArgs e)
         {
-            _openConnectionButton.Enabled = true;
-            _closeConnectionButton.Enabled = false;
-            _selectButton.Enabled = false;
-            _saveButton.Enabled = false;
-            SetDataTextBoxesEnabled(true);
+            OnRichTextBoxClick?.Invoke(this, EventArgs.Empty);
         }
 
-        private void SetDataTextBoxesEnabled(bool enebled)
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            foreach (Control control in _dataPanel.Controls)
-            {
-                if (control is TextBox textBox)
-                {
-                    textBox.Enabled = enebled;
-                }
-            }
-        }
-
-        public void ShowTitles(IEnumerable<Title> titles)
-        {
-            _queryTextBox.Text = "";
-            foreach (Title title in titles)
-            {
-                _queryTextBox.Text += title.ToString() + "\n";
-            }
-        }
-
-        private void _selectButton_Click(object sender, EventArgs e)
-        {
-            OnSelect?.Invoke(this, EventArgs.Empty);
-        }
-
-        private void _stateLabel_Click(object sender, EventArgs e)
-        {
-
+            OnViewClosing?.Invoke(this, EventArgs.Empty);
         }
     }
 }
