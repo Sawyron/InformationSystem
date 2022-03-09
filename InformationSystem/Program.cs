@@ -1,6 +1,7 @@
 using InformationSystem.Controllers;
 using InformationSystem.Models;
 using InformationSystem.Services;
+using InformationSystem.Services.Factories;
 using InformationSystem.Views;
 
 namespace InformationSystem
@@ -17,12 +18,17 @@ namespace InformationSystem
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            PageFactory pageFactory = new PageFactory();
             MainForm form = new MainForm();
-            List<UserControlPage<IDataController>> pages = new List<UserControlPage<IDataController>>();
-            pages.Add(pageFactory.GetRichBoxPage());
+            ConnectionPageFactory connectionPageFactory = new ConnectionPageFactory();
+            RichTextBoxPageFactory textBoxFactory = new RichTextBoxPageFactory();
+            List<IPageFactory<IDataController, UserControl>> pageFactories = new List<IPageFactory<IDataController, UserControl>>()
+            {
+                textBoxFactory
+            };
+            PagesFactory<IDataController, UserControl> pagesFactory = new PagesFactory<IDataController, UserControl>(pageFactories);
+
             MainController mainController = new MainController(form,
-                new MessageService(), pageFactory.GetConnectionPage(), pages);
+                new MessageService(), connectionPageFactory.CreatePage(), pagesFactory.GetPages());
 
             Application.Run(form);
         }

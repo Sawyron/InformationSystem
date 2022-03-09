@@ -11,19 +11,19 @@ namespace InformationSystem.Controllers
         private IMessageService _messageService;
         private IDbConnection? _dbConnection;
 
-        private UserControlPage<IConnectionStringController> _connectionPage;
+        private IPage<IConnectionStringController, UserControl> _connectionPage;
 
         public MainController(
             IMainView mainView,
             IMessageService messageService,
-            UserControlPage<IConnectionStringController> connectionPage,
-            IEnumerable<UserControlPage<IDataController>> controlPages
+            IPage<IConnectionStringController, UserControl> connectionPage,
+            IEnumerable<IPage<IDataController, UserControl>> controlPages
             )
         {
             _mainView = mainView;
             _messageService = messageService;
             _connectionPage = connectionPage;
-            foreach (UserControlPage<IDataController> page in controlPages)
+            foreach (IPage<IDataController, UserControl> page in controlPages)
             {
                 _mainView.AddPage(page.Name, () =>
                 {
@@ -51,7 +51,7 @@ namespace InformationSystem.Controllers
             _dbConnection = _connectionPage.Controller.DbConnection;
         }
 
-        private void OnOpeningDataPage(UserControlPage<IDataController> page)
+        private void OnOpeningDataPage(IPage<IDataController, UserControl> page)
         {
             if (_dbConnection != null && _dbConnection.State == ConnectionState.Open)
             {
