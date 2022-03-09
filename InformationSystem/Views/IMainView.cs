@@ -8,8 +8,8 @@ namespace InformationSystem.Views
 {
     public interface IMainView
     {
-        public void SetConnectionView();
-        public void SetRichTextBoxView();
+        public void AddPage(string name, Action action);
+        public void SetUserControl(UserControl control);
 
         event EventHandler? OnViewClosing;
         event EventHandler? OnConnectionClick;

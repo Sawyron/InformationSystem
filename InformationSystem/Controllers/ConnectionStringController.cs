@@ -6,18 +6,20 @@ using System.Data.Odbc;
 
 namespace InformationSystem.Controllers
 {
-    public class ConnectionController : IConnectionController
+    public class ConnectionStringController : IConnectionStringController
     {
         private IConnectionView _connectionView;
         private IConnectionString _connectionString;
         private IMessageService _messageService;
         private OdbcConnection? _connection;
 
+        public event EventHandler? OnOpeningConnection;
+
         public IDbConnection? DbConnection => _connection;
 
         public IConnectionView ConnectionView => _connectionView;
 
-        public ConnectionController(IConnectionString connection, IConnectionView connectionView, IMessageService messageService)
+        public ConnectionStringController(IConnectionString connection, IConnectionView connectionView, IMessageService messageService)
         {
             _connectionString = connection;
             _connectionView = connectionView;
@@ -36,6 +38,7 @@ namespace InformationSystem.Controllers
             {
                 _connection.Open();
                 _connectionView.SetOpenedState();
+                OnOpeningConnection?.Invoke(this, EventArgs.Empty);
                 _connectionView.ConnectionState = "Connection opened";
             }
             catch (OdbcException ex)

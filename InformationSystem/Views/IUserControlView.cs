@@ -9,5 +9,6 @@ namespace InformationSystem.Views
     public interface IUserControlView
     {
         UserControl UserControl { get; }
+        string Name { get; }
     }
 }

@@ -17,17 +17,13 @@ namespace InformationSystem
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
-            ConnectionView connectionView = new ConnectionView();
-            ConnectionController connectionController = new ConnectionController(
-                new OdbcConnectionString(string.Empty, "postgres", string.Empty),
-                connectionView,
-                new MessageService());
+            PageFactory pageFactory = new PageFactory();
+            MainForm form = new MainForm();
+            List<UserControlPage<IDataController>> pages = new List<UserControlPage<IDataController>>();
+            pages.Add(pageFactory.GetRichBoxPage());
+            MainController mainController = new MainController(form,
+                new MessageService(), pageFactory.GetConnectionPage(), pages);
 
-            RichTextBoxView textBoxView = new RichTextBoxView();
-            RichTextBoxController richTextBoxController = new RichTextBoxController(new TitleService(), textBoxView);
-
-            MainForm form = new MainForm(connectionView, textBoxView);
-            MainController mainController = new MainController(form, new MessageService(), connectionController, richTextBoxController);
             Application.Run(form);
         }
     }

@@ -20,7 +20,7 @@ namespace InformationSystem.Models
 
         public override string ToString()
         {
-            return $"Id: {Id}, Name: {Name}, Release: {Release}";
+            return $"Id: {Id}, Name: {Name}, Release: {Release.ToString("d")}";
         }
 
     }

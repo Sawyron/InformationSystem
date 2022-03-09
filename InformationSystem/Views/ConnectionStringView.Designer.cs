@@ -1,6 +1,6 @@
 ﻿namespace InformationSystem.Views
 {
-    partial class ConnectionView
+    partial class ConnectionStringView
     {
         /// <summary> 
         /// Required designer variable.

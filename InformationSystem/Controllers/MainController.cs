@@ -1,4 +1,5 @@
-﻿using InformationSystem.Services;
+﻿using InformationSystem.Models;
+using InformationSystem.Services;
 using InformationSystem.Views;
 using System.Data;
 
@@ -9,22 +10,30 @@ namespace InformationSystem.Controllers
         private IMainView _mainView;
         private IMessageService _messageService;
         private IDbConnection? _dbConnection;
-        private IConnectionController _connectionController;
-        private IDataController _richTextBoxController;
 
-        public MainController(IMainView mainView,
+        private UserControlPage<IConnectionStringController> _connectionPage;
+
+        public MainController(
+            IMainView mainView,
             IMessageService messageService,
-            IConnectionController connectionController,
-            IDataController richTextBoxController)
+            UserControlPage<IConnectionStringController> connectionPage,
+            IEnumerable<UserControlPage<IDataController>> controlPages
+            )
         {
             _mainView = mainView;
             _messageService = messageService;
-            _connectionController = connectionController;
-            _richTextBoxController = richTextBoxController;
+            _connectionPage = connectionPage;
+            foreach (UserControlPage<IDataController> page in controlPages)
+            {
+                _mainView.AddPage(page.Name, () =>
+                {
+                    OnOpeningDataPage(page);
+                });
+            }
+            _mainView.AddPage(_connectionPage.Name, () => OnOpeningConnectionPage());
 
+            _connectionPage.Controller.OnOpeningConnection += mainView_OnConnectionClick;
             _mainView.OnViewClosing += mainView_OnViewClosing;
-            _mainView.OnConnectionClick += mainView_OnConnectionClick;
-            _mainView.OnRichTextBoxClick += mainView_OnRichTextBoxClick;
         }
 
         private void mainView_OnViewClosing(object? sender, EventArgs e)
@@ -32,20 +41,27 @@ namespace InformationSystem.Controllers
             _dbConnection?.Close();
         }
 
-        private void mainView_OnRichTextBoxClick(object? sender, EventArgs e)
+        private void OnOpeningConnectionPage()
         {
-            _dbConnection = _connectionController.DbConnection;
-            if (_dbConnection != null && _dbConnection.State == ConnectionState.Open)
-            {
-                _richTextBoxController.DbConnection = _dbConnection;
-                _mainView.SetRichTextBoxView();
-            }
-            else { _messageService.ShowError("Connection is not opened"); }
+            _mainView.SetUserControl(_connectionPage.View);
         }
 
         private void mainView_OnConnectionClick(object? sender, EventArgs e)
         {
-            _mainView.SetConnectionView();
+            _dbConnection = _connectionPage.Controller.DbConnection;
+        }
+
+        private void OnOpeningDataPage(UserControlPage<IDataController> page)
+        {
+            if (_dbConnection != null && _dbConnection.State == ConnectionState.Open)
+            {
+                _mainView.SetUserControl(page.View);
+                page.Controller.DbConnection = _dbConnection;
+            }
+            else
+            {
+                _messageService.ShowError("Connection is not set");
+            }
         }
     }
 }

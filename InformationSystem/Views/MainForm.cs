@@ -2,30 +2,17 @@
 {
     public partial class MainForm : Form, IMainView
     {
-        private UserControl _connectionControl;
-        private UserControl _richTextBoxControl;
-        public MainForm(UserControl connectionControl, UserControl richTextBoxControl)
+        public MainForm()
         {
             InitializeComponent();
-            _connectionControl = connectionControl;
-            _richTextBoxControl = richTextBoxControl;
         }
 
         public event EventHandler? OnConnectionClick;
         public event EventHandler? OnRichTextBoxClick;
         public event EventHandler? OnViewClosing;
 
-        public void SetConnectionView()
-        {
-            SetUserControl(_connectionControl);
-        }
 
-        public void SetRichTextBoxView()
-        {
-            SetUserControl(_richTextBoxControl);
-        }
-
-        private void SetUserControl(UserControl control)
+        public void SetUserControl(UserControl control)
         {
             _containerPanel.Controls.Clear();
             control.Dock = DockStyle.Fill;
@@ -45,6 +32,16 @@
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             OnViewClosing?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void AddPage(string name, Action action)
+        {
+            Button button = new Button();
+            button.Text = name;
+            button.Click += (sender, args) => action();
+            button.Dock = DockStyle.Top;
+            button.TabStop = false;
+            _controlPanel.Controls.Add(button);
         }
     }
 }

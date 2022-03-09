@@ -1,8 +1,8 @@
 ﻿namespace InformationSystem.Views
 {
-    public partial class ConnectionView : UserControl, IConnectionView
+    public partial class ConnectionStringView : UserControl, IConnectionView
     {
-        public ConnectionView()
+        public ConnectionStringView()
         {
             InitializeComponent();
         }
@@ -23,6 +23,7 @@
         {
             _openButton.Enabled = false;
             _closeButton.Enabled = true;
+            _saveButton.Enabled = false;
             SetDataTextBoxesEnabled(false);
         }
 
@@ -30,7 +31,7 @@
         {
             _openButton.Enabled = true;
             _closeButton.Enabled = false;
-            _saveButton.Enabled = false;
+            _saveButton.Enabled = true;
             SetDataTextBoxesEnabled(true);
         }
 
