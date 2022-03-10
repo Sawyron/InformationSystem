@@ -3,10 +3,8 @@ using System.Data;
 
 namespace InformationSystem.Services
 {
-    public interface ITitleService
+    public interface ITitleService : IDataService
     {
-        IDbConnection? DbConnection { get; set; }
-
         IEnumerable<Title> GetAll();
     }
 }

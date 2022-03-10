@@ -19,6 +19,11 @@ namespace InformationSystem.Controllers
 
         private void richTextBoxView_OnSelect(object? sender, EventArgs e)
         {
+            OnLoad();
+        }
+
+        public void OnLoad()
+        {
             _richTextBoxView.ShowTitles(_titleService.GetAll());
         }
 

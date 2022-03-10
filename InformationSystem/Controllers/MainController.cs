@@ -70,6 +70,7 @@ namespace InformationSystem.Controllers
             {
                 _mainView.SetUserControl(page.View);
                 page.Controller.DbConnection = _dbConnection;
+                page.Controller.OnLoad();
             }
             else
             {

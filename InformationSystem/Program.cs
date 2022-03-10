@@ -20,10 +20,10 @@ namespace InformationSystem
 
             MainForm form = new MainForm();
             ConnectionPageFactory connectionPageFactory = new ConnectionPageFactory();
-            RichTextBoxPageFactory textBoxFactory = new RichTextBoxPageFactory();
             List<IPageFactory<IDataController, UserControl>> pageFactories = new List<IPageFactory<IDataController, UserControl>>()
             {
-                textBoxFactory
+                new RichTextBoxPageFactory(),
+                new SQLFunctionPageFactory()
             };
             PagesFactory<IDataController, UserControl> pagesFactory = new PagesFactory<IDataController, UserControl>(pageFactories);
 

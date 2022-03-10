@@ -46,35 +46,35 @@
             // 
             // _serverTextBox
             // 
-            this._serverTextBox.Location = new System.Drawing.Point(19, 26);
+            this._serverTextBox.Location = new System.Drawing.Point(121, 14);
             this._serverTextBox.Name = "_serverTextBox";
             this._serverTextBox.Size = new System.Drawing.Size(100, 23);
             this._serverTextBox.TabIndex = 0;
             // 
             // _portTextBox
             // 
-            this._portTextBox.Location = new System.Drawing.Point(19, 78);
+            this._portTextBox.Location = new System.Drawing.Point(121, 66);
             this._portTextBox.Name = "_portTextBox";
             this._portTextBox.Size = new System.Drawing.Size(100, 23);
             this._portTextBox.TabIndex = 1;
             // 
             // _databaseTextBox
             // 
-            this._databaseTextBox.Location = new System.Drawing.Point(19, 135);
+            this._databaseTextBox.Location = new System.Drawing.Point(121, 123);
             this._databaseTextBox.Name = "_databaseTextBox";
             this._databaseTextBox.Size = new System.Drawing.Size(100, 23);
             this._databaseTextBox.TabIndex = 2;
             // 
             // _userTextBox
             // 
-            this._userTextBox.Location = new System.Drawing.Point(19, 190);
+            this._userTextBox.Location = new System.Drawing.Point(121, 178);
             this._userTextBox.Name = "_userTextBox";
             this._userTextBox.Size = new System.Drawing.Size(100, 23);
             this._userTextBox.TabIndex = 3;
             // 
             // _passwordTextBox
             // 
-            this._passwordTextBox.Location = new System.Drawing.Point(19, 243);
+            this._passwordTextBox.Location = new System.Drawing.Point(121, 231);
             this._passwordTextBox.Name = "_passwordTextBox";
             this._passwordTextBox.PasswordChar = '*';
             this._passwordTextBox.Size = new System.Drawing.Size(100, 23);
@@ -83,51 +83,51 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(152, 34);
+            this.label1.Location = new System.Drawing.Point(48, 22);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(39, 15);
+            this.label1.Size = new System.Drawing.Size(42, 15);
             this.label1.TabIndex = 5;
-            this.label1.Text = "Server";
+            this.label1.Text = "Server:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(152, 86);
+            this.label2.Location = new System.Drawing.Point(58, 74);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(29, 15);
+            this.label2.Size = new System.Drawing.Size(32, 15);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Port";
+            this.label2.Text = "Port:";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(152, 143);
+            this.label3.Location = new System.Drawing.Point(29, 126);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(58, 15);
+            this.label3.Size = new System.Drawing.Size(61, 15);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Data Base";
+            this.label3.Text = "Data Base:";
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(152, 198);
+            this.label4.Location = new System.Drawing.Point(57, 186);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(30, 15);
+            this.label4.Size = new System.Drawing.Size(33, 15);
             this.label4.TabIndex = 8;
-            this.label4.Text = "User";
+            this.label4.Text = "User:";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(152, 251);
+            this.label5.Location = new System.Drawing.Point(30, 239);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(57, 15);
+            this.label5.Size = new System.Drawing.Size(60, 15);
             this.label5.TabIndex = 9;
-            this.label5.Text = "Password";
+            this.label5.Text = "Password:";
             // 
             // _saveButton
             // 
-            this._saveButton.Location = new System.Drawing.Point(19, 293);
+            this._saveButton.Location = new System.Drawing.Point(121, 280);
             this._saveButton.Name = "_saveButton";
             this._saveButton.Size = new System.Drawing.Size(100, 23);
             this._saveButton.TabIndex = 10;
@@ -137,9 +137,9 @@
             // 
             // _openButton
             // 
-            this._openButton.Location = new System.Drawing.Point(19, 340);
+            this._openButton.Location = new System.Drawing.Point(3, 322);
             this._openButton.Name = "_openButton";
-            this._openButton.Size = new System.Drawing.Size(100, 23);
+            this._openButton.Size = new System.Drawing.Size(60, 23);
             this._openButton.TabIndex = 11;
             this._openButton.Text = "Open";
             this._openButton.UseVisualStyleBackColor = true;
@@ -147,9 +147,9 @@
             // 
             // _closeButton
             // 
-            this._closeButton.Location = new System.Drawing.Point(152, 340);
+            this._closeButton.Location = new System.Drawing.Point(69, 322);
             this._closeButton.Name = "_closeButton";
-            this._closeButton.Size = new System.Drawing.Size(100, 23);
+            this._closeButton.Size = new System.Drawing.Size(60, 23);
             this._closeButton.TabIndex = 12;
             this._closeButton.Text = "Close";
             this._closeButton.UseVisualStyleBackColor = true;
@@ -158,12 +158,13 @@
             // _stateLabel
             // 
             this._stateLabel.AutoSize = true;
-            this._stateLabel.Location = new System.Drawing.Point(152, 297);
+            this._stateLabel.Location = new System.Drawing.Point(160, 330);
             this._stateLabel.Name = "_stateLabel";
-            this._stateLabel.Size = new System.Drawing.Size(0, 15);
+            this._stateLabel.Size = new System.Drawing.Size(64, 15);
             this._stateLabel.TabIndex = 13;
+            this._stateLabel.Text = "State Label";
             // 
-            // ConnectionView
+            // ConnectionStringView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -181,8 +182,8 @@
             this.Controls.Add(this._databaseTextBox);
             this.Controls.Add(this._portTextBox);
             this.Controls.Add(this._serverTextBox);
-            this.Name = "ConnectionView";
-            this.Size = new System.Drawing.Size(365, 377);
+            this.Name = "ConnectionStringView";
+            this.Size = new System.Drawing.Size(288, 377);
             this.Load += new System.EventHandler(this.ConnectionControl_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

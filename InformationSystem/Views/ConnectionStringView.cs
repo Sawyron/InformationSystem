@@ -64,6 +64,7 @@
         private void ConnectionControl_Load(object sender, EventArgs e)
         {
             OnViewLoad?.Invoke(this, EventArgs.Empty);
+            _stateLabel.Text = "";
         }
     }
 }
