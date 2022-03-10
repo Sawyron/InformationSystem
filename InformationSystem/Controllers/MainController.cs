@@ -23,17 +23,26 @@ namespace InformationSystem.Controllers
             _mainView = mainView;
             _messageService = messageService;
             _connectionPage = connectionPage;
+
+            _mainView.AddConnectionPage((sender, args) => OnOpeningConnectionPage());
             foreach (IPage<IDataController, UserControl> page in controlPages)
             {
-                _mainView.AddPage(page.Name, () =>
+                _mainView.AddPage(page.Name, (sender, args) =>
                 {
                     OnOpeningDataPage(page);
                 });
             }
-            _mainView.AddPage(_connectionPage.Name, () => OnOpeningConnectionPage());
+
+            _mainView.SetClosedState();
 
             _connectionPage.Controller.OnOpeningConnection += mainView_OnConnectionClick;
             _mainView.OnViewClosing += mainView_OnViewClosing;
+            _connectionPage.Controller.OnClosingConnection += Controller_OnClosingConnection;
+        }
+
+        private void Controller_OnClosingConnection(object? sender, EventArgs e)
+        {
+            _mainView.SetClosedState();
         }
 
         private void mainView_OnViewClosing(object? sender, EventArgs e)
@@ -49,6 +58,10 @@ namespace InformationSystem.Controllers
         private void mainView_OnConnectionClick(object? sender, EventArgs e)
         {
             _dbConnection = _connectionPage.Controller.DbConnection;
+            if (_dbConnection != null)
+            {
+                _mainView.SetOpenedState();
+            }
         }
 
         private void OnOpeningDataPage(IPage<IDataController, UserControl> page)

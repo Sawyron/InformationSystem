@@ -14,6 +14,7 @@ namespace InformationSystem.Controllers
         private OdbcConnection? _connection;
 
         public event EventHandler? OnOpeningConnection;
+        public event EventHandler? OnClosingConnection;
 
         public IDbConnection? DbConnection => _connection;
 
@@ -38,8 +39,8 @@ namespace InformationSystem.Controllers
             {
                 _connection.Open();
                 _connectionView.SetOpenedState();
-                OnOpeningConnection?.Invoke(this, EventArgs.Empty);
                 _connectionView.ConnectionState = "Connection opened";
+                OnOpeningConnection?.Invoke(this, EventArgs.Empty);
             }
             catch (OdbcException ex)
             {
@@ -52,6 +53,7 @@ namespace InformationSystem.Controllers
             _connection?.Close();
             _connectionView.SetClosedState();
             _connectionView.ConnectionState = "Connection closed";
+            OnClosingConnection?.Invoke(this, EventArgs.Empty);
         }
 
 

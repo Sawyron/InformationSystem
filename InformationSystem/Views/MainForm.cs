@@ -8,7 +8,6 @@
         }
 
         public event EventHandler? OnConnectionClick;
-        public event EventHandler? OnRichTextBoxClick;
         public event EventHandler? OnViewClosing;
 
 
@@ -24,24 +23,47 @@
             OnConnectionClick?.Invoke(this, EventArgs.Empty);
         }
 
-        private void _richTextBox_Click(object sender, EventArgs e)
-        {
-            OnRichTextBoxClick?.Invoke(this, EventArgs.Empty);
-        }
-
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             OnViewClosing?.Invoke(this, EventArgs.Empty);
         }
 
-        public void AddPage(string name, Action action)
+        public void AddPage(string name, EventHandler handler)
         {
             Button button = new Button();
             button.Text = name;
-            button.Click += (sender, args) => action();
-            button.Dock = DockStyle.Top;
+            button.Click += handler;
             button.TabStop = false;
+            button.Size = _connectionButton.Size;
             _controlPanel.Controls.Add(button);
+        }
+
+        public void AddConnectionPage(EventHandler handler)
+        {
+            _connectionButton.Click += handler;
+        }
+
+        public void SetOpenedState()
+        {
+            foreach (Control control in _controlPanel.Controls)
+            {
+                if (control is Button button)
+                {
+                    button.Enabled = true;
+                }
+            }
+        }
+
+        public void SetClosedState()
+        {
+            foreach (Control control in _controlPanel.Controls)
+            {
+                if (control is Button button)
+                {
+                    button.Enabled = false;
+                }
+            }
+            _connectionButton.Enabled = true;
         }
     }
 }
