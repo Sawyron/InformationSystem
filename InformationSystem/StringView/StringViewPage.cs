@@ -1,19 +1,12 @@
 ﻿using InformationSystem.Models;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
+using InformationSystem.StringView;
 using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
-namespace InformationSystem.Views
+namespace InformationSystem.StringView
 {
-    public partial class RichTextBoxView : UserControl, IRichTextBoxView
+    public partial class StringViewPage : UserControl, IStringView
     {
-        public RichTextBoxView()
+        public StringViewPage()
         {
             InitializeComponent();
         }

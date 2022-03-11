@@ -1,15 +1,15 @@
-﻿using InformationSystem.Services;
-using InformationSystem.Views;
+﻿using InformationSystem.Controllers;
+using InformationSystem.Services;
 using System.Data;
 
-namespace InformationSystem.Controllers
+namespace InformationSystem.StringView
 {
-    public class RichTextBoxController : IDataController
+    public class StringViewController : IDataController
     {
         private ITitleService _titleService;
-        private IRichTextBoxView _richTextBoxView;
+        private IStringView _richTextBoxView;
 
-        public RichTextBoxController(ITitleService titleService, IRichTextBoxView richTextBoxView)
+        public StringViewController(ITitleService titleService, IStringView richTextBoxView)
         {
             _titleService = titleService;
             _richTextBoxView = richTextBoxView;

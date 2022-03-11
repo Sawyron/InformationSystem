@@ -1,4 +1,4 @@
-﻿namespace InformationSystem.Views
+﻿namespace InformationSystem.Connection
 {
     partial class ConnectionStringView
     {

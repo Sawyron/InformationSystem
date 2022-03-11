@@ -1,6 +1,4 @@
-﻿using InformationSystem.Services;
-
-namespace InformationSystem.Views
+﻿namespace InformationSystem.SQLFunctions
 {
     public partial class SQLFunctionsView : UserControl, ISQLFunctionsView
     {
@@ -11,7 +9,7 @@ namespace InformationSystem.Views
 
         public string Code { get => _codeTextBox.Text; set => _codeTextBox.Text = value; }
 
-        public event EventHandler<FunctionEventArgs>? ChangedSelectedFunction;
+        public event EventHandler<SQLFunctionEventArgs>? ChangedSelectedFunction;
 
         public void LoadFunctions(IEnumerable<string> functions, string firstCode)
         {
@@ -29,7 +27,7 @@ namespace InformationSystem.Views
             string? functionName = _functionsComboBox.SelectedItem.ToString();
             if (string.IsNullOrEmpty(functionName) == false)
             {
-                ChangedSelectedFunction?.Invoke(this, new FunctionEventArgs(functionName));
+                ChangedSelectedFunction?.Invoke(this, new SQLFunctionEventArgs(functionName));
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using System.Data.Odbc;
-
-namespace InformationSystem.Models
+﻿namespace InformationSystem.Connection
 {
     public class OdbcConnectionString : IConnectionString
     {

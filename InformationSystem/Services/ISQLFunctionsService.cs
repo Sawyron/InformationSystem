@@ -1,4 +1,4 @@
-﻿using InformationSystem.Models;
+﻿using InformationSystem.SQLFunctions;
 
 namespace InformationSystem.Services
 {

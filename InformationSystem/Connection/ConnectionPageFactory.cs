@@ -1,13 +1,8 @@
-﻿using InformationSystem.Controllers;
-using InformationSystem.Models;
-using InformationSystem.Views;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using InformationSystem.Models;
+using InformationSystem.Services;
+using InformationSystem.Services.Factories;
 
-namespace InformationSystem.Services.Factories
+namespace InformationSystem.Connection
 {
     public class ConnectionPageFactory : IPageFactory<IConnectionStringController, UserControl>
     {

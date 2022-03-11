@@ -1,4 +1,4 @@
-﻿namespace InformationSystem.Views
+﻿namespace InformationSystem.SQLFunctions
 {
     partial class SQLFunctionsView
     {

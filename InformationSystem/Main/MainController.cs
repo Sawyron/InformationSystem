@@ -1,9 +1,10 @@
-﻿using InformationSystem.Models;
+﻿using InformationSystem.Connection;
+using InformationSystem.Controllers;
+using InformationSystem.Models;
 using InformationSystem.Services;
-using InformationSystem.Views;
 using System.Data;
 
-namespace InformationSystem.Controllers
+namespace InformationSystem.Main
 {
     public class MainController
     {

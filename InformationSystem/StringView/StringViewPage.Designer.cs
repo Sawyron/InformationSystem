@@ -1,6 +1,6 @@
-﻿namespace InformationSystem.Views
+﻿namespace InformationSystem.StringView
 {
-    partial class RichTextBoxView
+    partial class StringViewPage
     {
         /// <summary> 
         /// Required designer variable.

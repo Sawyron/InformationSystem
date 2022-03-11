@@ -1,11 +1,9 @@
-﻿using InformationSystem.Services;
-
-namespace InformationSystem.Views
+﻿namespace InformationSystem.SQLFunctions
 {
     public interface ISQLFunctionsView
     {
         string Code { get; set; }
         void LoadFunctions(IEnumerable<string> functions, string firstCode);
-        event EventHandler<FunctionEventArgs>? ChangedSelectedFunction;
+        event EventHandler<SQLFunctionEventArgs>? ChangedSelectedFunction;
     }
 }

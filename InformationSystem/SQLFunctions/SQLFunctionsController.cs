@@ -1,9 +1,8 @@
-﻿using InformationSystem.Models;
+﻿using InformationSystem.Controllers;
 using InformationSystem.Services;
-using InformationSystem.Views;
 using System.Data;
 
-namespace InformationSystem.Controllers
+namespace InformationSystem.SQLFunctions
 {
     public class SQLFunctionsController : IDataController
     {
@@ -17,7 +16,7 @@ namespace InformationSystem.Controllers
             _view.ChangedSelectedFunction += view_ChangedSelectedFunction;
         }
 
-        private void view_ChangedSelectedFunction(object? sender, FunctionEventArgs e)
+        private void view_ChangedSelectedFunction(object? sender, SQLFunctionEventArgs e)
         {
             List<ISQLFunction> functions = _service.GetAll().ToList();
             ISQLFunction? f = functions.Find((fn) =>
@@ -40,7 +39,7 @@ namespace InformationSystem.Controllers
             {
                 functionNames.Add(fn.Name);
             }
-            _view.LoadFunctions(functionNames,functions.First().Code);
+            _view.LoadFunctions(functionNames, functions.First().Code);
         }
     }
 }

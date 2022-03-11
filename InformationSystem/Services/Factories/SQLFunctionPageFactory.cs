@@ -1,6 +1,6 @@
 ﻿using InformationSystem.Controllers;
 using InformationSystem.Models;
-using InformationSystem.Views;
+using InformationSystem.SQLFunctions;
 
 namespace InformationSystem.Services.Factories
 {

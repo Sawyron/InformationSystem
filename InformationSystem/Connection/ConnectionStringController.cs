@@ -1,10 +1,8 @@
-﻿using InformationSystem.Models;
-using InformationSystem.Services;
-using InformationSystem.Views;
+﻿using InformationSystem.Services;
 using System.Data;
 using System.Data.Odbc;
 
-namespace InformationSystem.Controllers
+namespace InformationSystem.Connection
 {
     public class ConnectionStringController : IConnectionStringController
     {

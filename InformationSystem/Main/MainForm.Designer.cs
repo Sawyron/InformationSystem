@@ -1,4 +1,4 @@
-﻿namespace InformationSystem.Views
+﻿namespace InformationSystem.Main
 {
     partial class MainForm
     {

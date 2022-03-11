@@ -1,6 +1,4 @@
-﻿using InformationSystem.Models;
-
-namespace InformationSystem.Views
+﻿namespace InformationSystem.Connection
 {
     public interface IConnectionView
     {

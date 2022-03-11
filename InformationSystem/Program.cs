@@ -1,8 +1,9 @@
+using InformationSystem.Connection;
 using InformationSystem.Controllers;
-using InformationSystem.Models;
+using InformationSystem.Main;
 using InformationSystem.Services;
 using InformationSystem.Services.Factories;
-using InformationSystem.Views;
+using InformationSystem.StringView;
 
 namespace InformationSystem
 {
@@ -22,7 +23,7 @@ namespace InformationSystem
             ConnectionPageFactory connectionPageFactory = new ConnectionPageFactory();
             List<IPageFactory<IDataController, UserControl>> pageFactories = new List<IPageFactory<IDataController, UserControl>>()
             {
-                new RichTextBoxPageFactory(),
+                new StringViewPageFactory(),
                 new SQLFunctionPageFactory()
             };
             PagesFactory<IDataController, UserControl> pagesFactory = new PagesFactory<IDataController, UserControl>(pageFactories);

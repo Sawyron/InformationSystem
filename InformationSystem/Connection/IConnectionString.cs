@@ -1,4 +1,4 @@
-﻿namespace InformationSystem.Models
+﻿namespace InformationSystem.Connection
 {
     public interface IConnectionString
     {

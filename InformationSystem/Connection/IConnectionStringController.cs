@@ -1,7 +1,6 @@
-﻿using InformationSystem.Views;
-using System.Data;
+﻿using System.Data;
 
-namespace InformationSystem.Controllers
+namespace InformationSystem.Connection
 {
     public interface IConnectionStringController
     {
