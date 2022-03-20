@@ -1,33 +1,28 @@
-﻿namespace InformationSystem.SQLFunctions
+﻿
+using System.Collections.Immutable;
+
+namespace InformationSystem.SQLFunctions
 {
     public class SQLFunction : ISQLFunction
     {
-        private string _name;
+        private readonly string _name;
+        private ImmutableDictionary<string, string> _arguments;
         private string _code;
-        private List<string> _parameters = new List<string>();
+        private readonly string _returnType;
 
-        public SQLFunction(string name, string code)
+        public SQLFunction(string name, string code, IDictionary<string, string> arguments, string returnType)
         {
             _name = name;
             _code = code;
+            _arguments = arguments.ToImmutableDictionary();
+            _returnType = returnType;
         }
         public string Name => _name;
 
-        public IEnumerable<string> Parameters
-        {
-            get => _parameters;
-            set
-            {
-                _parameters.Clear();
-                _parameters.AddRange(value);
-            }
-        }
-
         public string Code { get => _code; set => _code = value; }
 
-        public override string ToString()
-        {
-            return $"{_name}({string.Join(',', _parameters)})";
-        }
+        public IImmutableDictionary<string, string> Arguments => _arguments;
+
+        public string ReturnType => _returnType;
     }
 }

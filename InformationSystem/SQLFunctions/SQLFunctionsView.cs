@@ -8,10 +8,12 @@
         }
 
         public string Code { get => _codeTextBox.Text; set => _codeTextBox.Text = value; }
+        public string Arguments { get => _argumentsLabel.Text; set => _argumentsLabel.Text = value; }
+        public string ReturnType { get => _returnTypeLabel.Text; set => _returnTypeLabel.Text = value; }
 
         public event EventHandler<SQLFunctionEventArgs>? ChangedSelectedFunction;
 
-        public void LoadFunctions(IEnumerable<string> functions, string firstCode)
+        public void LoadFunctions(IEnumerable<string> functions)
         {
             _functionsComboBox.Items.Clear();
             _functionsComboBox.Items.AddRange(functions.ToArray());
@@ -19,7 +21,6 @@
             {
                 _functionsComboBox.SelectedIndex = 0;
             }
-            _codeTextBox.Text = firstCode;
         }
 
         private void _functionsComboBox_SelectedIndexChanged(object sender, EventArgs e)

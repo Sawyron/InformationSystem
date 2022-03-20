@@ -1,9 +1,12 @@
-﻿namespace InformationSystem.SQLFunctions
+﻿using System.Collections.Immutable;
+
+namespace InformationSystem.SQLFunctions
 {
     public interface ISQLFunction
     {
         string Name { get; }
+        IImmutableDictionary<string, string> Arguments { get; }
         string Code { get; set; }
-        IEnumerable<string> Parameters { get; set; }
+        string ReturnType { get; }
     }
 }

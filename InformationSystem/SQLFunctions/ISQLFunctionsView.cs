@@ -2,8 +2,10 @@
 {
     public interface ISQLFunctionsView
     {
+        string Arguments { get; set; }
         string Code { get; set; }
-        void LoadFunctions(IEnumerable<string> functions, string firstCode);
+        string ReturnType { get; set; }
+        void LoadFunctions(IEnumerable<string> functions);
         event EventHandler<SQLFunctionEventArgs>? ChangedSelectedFunction;
     }
 }

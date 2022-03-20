@@ -1,6 +1,7 @@
 ﻿using InformationSystem.Controllers;
 using InformationSystem.Services;
 using System.Data;
+using System.Text;
 
 namespace InformationSystem.SQLFunctions
 {
@@ -15,7 +16,7 @@ namespace InformationSystem.SQLFunctions
             _view = view;
             _view.ChangedSelectedFunction += view_ChangedSelectedFunction;
         }
-
+        public IDbConnection DbConnection { set => _service.DbConnection = value; }
         private void view_ChangedSelectedFunction(object? sender, SQLFunctionEventArgs e)
         {
             List<ISQLFunction> functions = _service.GetAll().ToList();
@@ -24,13 +25,22 @@ namespace InformationSystem.SQLFunctions
                 return fn.Name.Equals(e.Name);
             });
             if (f != null)
-            {
-                _view.Code = f.Code;
-            }
+                ShowFunction(f);
+            
         }
-
-        public IDbConnection DbConnection { set => _service.DbConnection = value; }
-
+        private void ShowFunction(ISQLFunction function)
+        {
+            _view.Code = function.Code;
+            _view.ReturnType = function.ReturnType;
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var pair in function.Arguments)
+            {
+                stringBuilder.Append(string.Join(" ", new string[] { pair.Key, pair.Value }));
+                if (stringBuilder.Length > 0)
+                    stringBuilder.Append(", ");
+            }
+            _view.Arguments = stringBuilder.ToString();
+        }
         public void OnLoad()
         {
             List<string> functionNames = new List<string>();
@@ -39,7 +49,10 @@ namespace InformationSystem.SQLFunctions
             {
                 functionNames.Add(fn.Name);
             }
-            _view.LoadFunctions(functionNames, functions.First().Code);
+            _view.LoadFunctions(functionNames);
+            ISQLFunction? firstFunction = functions.FirstOrDefault();
+            if (firstFunction != null)
+                ShowFunction(firstFunction);
         }
     }
 }

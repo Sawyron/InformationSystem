@@ -1,8 +1,9 @@
-﻿namespace InformationSystem.Services
+﻿using InformationSystem.Models;
+
+namespace InformationSystem.Services
 {
     public interface ITableService
     {
-        IEnumerable<string> GetColumnNames();
-        IEnumerable<IEnumerable<object>> GetRows();
+        ITable GetTable(string name);
     }
 }
