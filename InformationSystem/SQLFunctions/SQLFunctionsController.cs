@@ -32,14 +32,7 @@ namespace InformationSystem.SQLFunctions
         {
             _view.Code = function.Code;
             _view.ReturnType = function.ReturnType;
-            StringBuilder stringBuilder = new StringBuilder();
-            foreach (var pair in function.Arguments)
-            {
-                stringBuilder.Append(string.Join(" ", new string[] { pair.Key, pair.Value }));
-                if (stringBuilder.Length > 0)
-                    stringBuilder.Append(", ");
-            }
-            _view.Arguments = stringBuilder.ToString();
+            _view.ShowArguments(function.Arguments);
         }
         public void OnLoad()
         {

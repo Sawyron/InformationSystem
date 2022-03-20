@@ -1,4 +1,6 @@
-﻿namespace InformationSystem.SQLFunctions
+﻿using System.Text;
+
+namespace InformationSystem.SQLFunctions
 {
     public partial class SQLFunctionsView : UserControl, ISQLFunctionsView
     {
@@ -8,7 +10,6 @@
         }
 
         public string Code { get => _codeTextBox.Text; set => _codeTextBox.Text = value; }
-        public string Arguments { get => _argumentsLabel.Text; set => _argumentsLabel.Text = value; }
         public string ReturnType { get => _returnTypeLabel.Text; set => _returnTypeLabel.Text = value; }
 
         public event EventHandler<SQLFunctionEventArgs>? ChangedSelectedFunction;
@@ -21,6 +22,19 @@
             {
                 _functionsComboBox.SelectedIndex = 0;
             }
+        }
+
+        public void ShowArguments(IReadOnlyDictionary<string, string> arguments)
+        {
+            _argumentsLabel.Text = "";
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach(var pair in arguments)
+            {
+                if (stringBuilder.Length > 0)
+                    stringBuilder.Append(", ");
+                stringBuilder.Append($"{pair.Key} {pair.Value}");
+            }
+            _argumentsLabel.Text = stringBuilder.ToString();
         }
 
         private void _functionsComboBox_SelectedIndexChanged(object sender, EventArgs e)

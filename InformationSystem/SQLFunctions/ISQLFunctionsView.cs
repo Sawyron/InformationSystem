@@ -2,7 +2,7 @@
 {
     public interface ISQLFunctionsView
     {
-        string Arguments { get; set; }
+        void ShowArguments(IReadOnlyDictionary<string, string> arguments);
         string Code { get; set; }
         string ReturnType { get; set; }
         void LoadFunctions(IEnumerable<string> functions);
