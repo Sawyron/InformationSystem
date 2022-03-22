@@ -11,8 +11,10 @@ namespace InformationSystem.SQLFunctions
 
         public string Code { get => _codeTextBox.Text; set => _codeTextBox.Text = value; }
         public string ReturnType { get => _returnTypeLabel.Text; set => _returnTypeLabel.Text = value; }
+        public string State { get => _stateLabel.Text; set => _stateLabel.Text = value; }
 
         public event EventHandler<SQLFunctionEventArgs>? ChangedSelectedFunction;
+        public event EventHandler<SQLFunctionEventArgs>? UpdatedFunctionDefinition;
 
         public void LoadFunctions(IEnumerable<string> functions)
         {
@@ -26,7 +28,6 @@ namespace InformationSystem.SQLFunctions
 
         public void ShowArguments(IReadOnlyDictionary<string, string> arguments)
         {
-            _argumentsLabel.Text = "";
             StringBuilder stringBuilder = new StringBuilder();
             foreach(var pair in arguments)
             {
@@ -42,8 +43,20 @@ namespace InformationSystem.SQLFunctions
             string? functionName = _functionsComboBox.SelectedItem.ToString();
             if (string.IsNullOrEmpty(functionName) == false)
             {
-                ChangedSelectedFunction?.Invoke(this, new SQLFunctionEventArgs(functionName));
+                ChangedSelectedFunction?.Invoke(this, new SQLFunctionEventArgs(functionName, _codeTextBox.Text));
             }
+        }
+
+        private void _updateButton_Click(object sender, EventArgs e)
+        {
+            string? functionName = _functionsComboBox.SelectedItem.ToString();
+            if (string.IsNullOrEmpty(functionName) == false)
+                UpdatedFunctionDefinition?.Invoke(this, new SQLFunctionEventArgs(functionName, _codeTextBox.Text));
+        }
+
+        private void SQLFunctionsView_Load(object sender, EventArgs e)
+        {
+            _stateLabel.Text = "";
         }
     }
 }

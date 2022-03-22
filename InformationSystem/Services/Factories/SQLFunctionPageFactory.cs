@@ -8,9 +8,10 @@ namespace InformationSystem.Services.Factories
     {
         public IPage<IDataController, UserControl> CreatePage()
         {
-            PostgesqlFunctionsService service = new PostgesqlFunctionsService();
+            PostgesqlFunctionsService functionService = new PostgesqlFunctionsService();
             SQLFunctionsView view = new SQLFunctionsView();
-            SQLFunctionsController controller = new SQLFunctionsController(service, view);
+            MessageService messageService = new MessageService();
+            SQLFunctionsController controller = new SQLFunctionsController(view, functionService, messageService);
             return new Page<IDataController, UserControl>(view, controller, "Functions");
         }
     }
