@@ -1,5 +1,6 @@
 using InformationSystem.Connection;
 using InformationSystem.Controllers;
+using InformationSystem.Infrastructure;
 using InformationSystem.Main;
 using InformationSystem.Services;
 using InformationSystem.Services.Factories;
@@ -21,15 +22,10 @@ namespace InformationSystem
 
             MainForm form = new MainForm();
             ConnectionPageFactory connectionPageFactory = new ConnectionPageFactory();
-            List<IPageFactory<IDataController, UserControl>> pageFactories = new List<IPageFactory<IDataController, UserControl>>()
-            {
-                new StringViewPageFactory(),
-                new SQLFunctionPageFactory()
-            };
-            PagesFactory<IDataController, UserControl> pagesFactory = new PagesFactory<IDataController, UserControl>(pageFactories);
+            PageLoader<IDataController, UserControl> pageLoader = new PageLoader<IDataController, UserControl>();
 
             MainController mainController = new MainController(form,
-                new MessageService(), connectionPageFactory.CreatePage(), pagesFactory.GetPages());
+                new MessageService(), connectionPageFactory.CreatePage(), pageLoader.GetPages());
 
             Application.Run(form);
         }
