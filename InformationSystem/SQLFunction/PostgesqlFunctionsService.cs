@@ -1,6 +1,5 @@
 ﻿using InformationSystem.SQLFunctions;
 using System.Data;
-using System.Data.Common;
 
 namespace InformationSystem.Services
 {

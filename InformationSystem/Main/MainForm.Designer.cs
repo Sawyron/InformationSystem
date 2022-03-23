@@ -72,6 +72,7 @@
             this.Controls.Add(this._containerPanel);
             this.Controls.Add(this._controlPanel);
             this.Name = "MainForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "MainForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
             this._controlPanel.ResumeLayout(false);

@@ -9,15 +9,15 @@
         public static MessageService Instance => _instance.Value;
         public void ShowMessage(string message)
         {
-            MessageBox.Show(message, "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(message, "Message", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         public void ShowExclamation(string exclamination)
         {
-            MessageBox.Show(exclamination, "", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            MessageBox.Show(exclamination, "Exclamination", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
         }
         public void ShowError(string error)
         {
-            MessageBox.Show(error, "", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            MessageBox.Show(error, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
     }
 }
