@@ -10,7 +10,7 @@ namespace InformationSystem.StringView
         public IPage<IDataController, UserControl> CreatePage()
         {
             StringViewPage textBoxView = new StringViewPage();
-            StringViewController richTextBoxController = new StringViewController(new TitleService(), textBoxView);
+            StringViewController richTextBoxController = new StringViewController(textBoxView, new TitleService(), MessageService.Instance);
             Page<IDataController, UserControl> page = new Page<IDataController, UserControl>(textBoxView, richTextBoxController, "Rich Text Box");
             return page;
         }

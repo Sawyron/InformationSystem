@@ -1,8 +1,6 @@
 ﻿using InformationSystem.Controllers;
 using InformationSystem.Services;
 using System.Data;
-using System.Data.Common;
-using System.Text;
 
 namespace InformationSystem.SQLFunctions
 {
@@ -34,7 +32,7 @@ namespace InformationSystem.SQLFunctions
                     _service.Update(function);
                     _view.State = "Function succsesfully updated";
                 }
-                catch (DbException ex)
+                catch (Exception ex)
                 {
                     _messageService.ShowError(ex.Message);
                 }

@@ -10,28 +10,20 @@ namespace InformationSystem.Services
 
         public IEnumerable<Title> GetAll()
         {
+            if (DbConnection == null)
+                throw new ConnectionIsNotSetExepton();
             List<Title> titles = new List<Title>();
-            if (DbConnection != null)
+            IDbCommand command = DbConnection.CreateCommand();
+            command.CommandText = "SELECT * FROM titles";
+            using (IDataReader reader = command.ExecuteReader())
             {
-                try
+                while (reader.Read())
                 {
-                    IDbCommand command = DbConnection.CreateCommand();
-                    command.CommandText = "SELECT * FROM titles";
-                    using (IDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            titles.Add(new Title(
-                                (int)reader["id"],
-                                (string)reader["name"],
-                                (DateTime)reader["release"]
-                                ));
-                        }
-                    }
-                }
-                catch (DbException)
-                {
-
+                    titles.Add(new Title(
+                        (int)reader["id"],
+                        (string)reader["name"],
+                        (DateTime)reader["release"]
+                        ));
                 }
             }
             return titles;

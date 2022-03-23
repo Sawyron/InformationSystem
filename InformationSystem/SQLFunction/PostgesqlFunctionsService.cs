@@ -25,39 +25,31 @@ namespace InformationSystem.Services
 
         public IEnumerable<ISQLFunction> GetAll()
         {
-            List<ISQLFunction> functions = new List<ISQLFunction>();
             if (_dbConnection == null)
                 throw new ConnectionIsNotSetExepton();
-            try
+            List<ISQLFunction> functions = new List<ISQLFunction>();
+            IDbCommand command = _dbConnection.CreateCommand();
+            command.CommandText = _functionInfoQuery;
+            using (IDataReader reader = command.ExecuteReader())
             {
-                IDbCommand command = _dbConnection.CreateCommand();
-                command.CommandText = _functionInfoQuery;
-                using (IDataReader reader = command.ExecuteReader())
+                while (reader.Read())
                 {
-                    while (reader.Read())
+                    string stringArguments = reader["arguments"].ToString() ?? string.Empty;
+                    Dictionary<string, string> argumentsDict = new Dictionary<string, string>();
+                    foreach (string argumentPair in stringArguments.Split(","))
                     {
-                        string stringArguments = reader["arguments"].ToString() ?? string.Empty;
-                        Dictionary<string, string> argumentsDict = new Dictionary<string, string>();
-                        foreach (string argumentPair in stringArguments.Split(","))
+                        string[] pair = argumentPair.Split(" ");
+                        if (pair.Length == 2)
                         {
-                            string[] pair = argumentPair.Split(" ");
-                            if (pair.Length == 2)
-                            {
-                                argumentsDict.Add(pair[0], pair[1]);
-                            }
+                            argumentsDict.Add(pair[0], pair[1]);
                         }
-                        string name = (string)reader["specific_name"];
-                        string code = (string)reader["definition"];
-                        string type = (string)reader["return_type"];
-                        functions.Add(new SQLFunction(name, code, argumentsDict, type));
                     }
+                    string name = (string)reader["specific_name"];
+                    string code = (string)reader["definition"];
+                    string type = (string)reader["return_type"];
+                    functions.Add(new SQLFunction(name, code, argumentsDict, type));
                 }
             }
-            catch (DbException)
-            {
-
-            }
-
             return functions;
         }
 
@@ -90,11 +82,6 @@ namespace InformationSystem.Services
             command.CommandText = createFunctionQuery;
             command.ExecuteNonQuery();
         }
-        private string GetUpdatedDefinition(ISQLFunction function)
-        {
-            return "";
-        }
-
         private static string UpdateFunctionDefinition(string definition, string body)
         {
             string marker = "$function$";
