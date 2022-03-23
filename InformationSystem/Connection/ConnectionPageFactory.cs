@@ -12,7 +12,7 @@ namespace InformationSystem.Connection
             ConnectionStringController connectionController = new ConnectionStringController(
                 new OdbcConnectionString(string.Empty, "postgres", string.Empty),
                 connectionView,
-                new MessageService());
+                MessageService.Instance);
 
             Page<IConnectionStringController, UserControl> connectionPage = new Page<IConnectionStringController, UserControl>(connectionView, connectionController, "Connection");
             return connectionPage;

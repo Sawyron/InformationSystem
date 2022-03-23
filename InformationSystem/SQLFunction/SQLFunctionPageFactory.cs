@@ -10,7 +10,7 @@ namespace InformationSystem.Services.Factories
         {
             PostgesqlFunctionsService functionService = new PostgesqlFunctionsService();
             SQLFunctionsView view = new SQLFunctionsView();
-            MessageService messageService = new MessageService();
+            MessageService messageService = MessageService.Instance;
             SQLFunctionsController controller = new SQLFunctionsController(view, functionService, messageService);
             return new Page<IDataController, UserControl>(view, controller, "Functions");
         }

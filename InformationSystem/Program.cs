@@ -3,8 +3,6 @@ using InformationSystem.Controllers;
 using InformationSystem.Infrastructure;
 using InformationSystem.Main;
 using InformationSystem.Services;
-using InformationSystem.Services.Factories;
-using InformationSystem.StringView;
 
 namespace InformationSystem
 {
@@ -25,7 +23,7 @@ namespace InformationSystem
             PageLoader<IDataController, UserControl> pageLoader = new PageLoader<IDataController, UserControl>();
 
             MainController mainController = new MainController(form,
-                new MessageService(), connectionPageFactory.CreatePage(), pageLoader.GetPages());
+               MessageService.Instance, connectionPageFactory.CreatePage(), pageLoader.GetPages());
 
             Application.Run(form);
         }
