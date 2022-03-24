@@ -14,12 +14,12 @@ namespace InformationSystem.DataView
         public void SetTable(string name)
         {
             if (_connection == null)
-                throw new ConnectionIsNotSetExepton();
-            OdbcConnection? OdbcConnection = _connection as OdbcConnection;
-            if (OdbcConnection == null)
+                throw new ConnectionIsNotSetException();
+            OdbcConnection? odbcConnection = _connection as OdbcConnection;
+            if (odbcConnection == null)
                 throw new ArgumentException("ODBC connection is required");
             string query = $"SELECT * FROM {name}";
-            _adapter = new OdbcDataAdapter(query, OdbcConnection);
+            _adapter = new OdbcDataAdapter(query, odbcConnection);
             _dataSet = new DataSet();
             _table = name;
             OdbcCommandBuilder builder = new OdbcCommandBuilder(_adapter);

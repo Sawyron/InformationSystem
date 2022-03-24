@@ -25,7 +25,7 @@ namespace InformationSystem.Services
         public IEnumerable<ISQLFunction> GetAll()
         {
             if (_dbConnection == null)
-                throw new ConnectionIsNotSetExepton();
+                throw new ConnectionIsNotSetException();
             List<ISQLFunction> functions = new List<ISQLFunction>();
             IDbCommand command = _dbConnection.CreateCommand();
             command.CommandText = _functionInfoQuery;
@@ -55,7 +55,7 @@ namespace InformationSystem.Services
         public void Update(ISQLFunction function)
         {
             if (_dbConnection == null)
-                throw new ConnectionIsNotSetExepton();
+                throw new ConnectionIsNotSetException();
 
             string selectDefinitionQuery = $@"
             SELECT

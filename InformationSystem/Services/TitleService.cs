@@ -11,7 +11,7 @@ namespace InformationSystem.Services
         public IEnumerable<Title> GetAll()
         {
             if (DbConnection == null)
-                throw new ConnectionIsNotSetExepton();
+                throw new ConnectionIsNotSetException();
             List<Title> titles = new List<Title>();
             IDbCommand command = DbConnection.CreateCommand();
             command.CommandText = "SELECT * FROM titles";

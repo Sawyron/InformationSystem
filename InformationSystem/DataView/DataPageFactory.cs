@@ -11,7 +11,8 @@ namespace InformationSystem.DataView
         {
             TableService tableService = new TableService();
             DataView dataView = new DataView();
-            DataController dataController = new DataController(dataView, tableService, MessageService.Instance);
+            DataBaseService dataBaseService = new DataBaseService();
+            DataController dataController = new DataController(dataView, tableService, dataBaseService, MessageService.Instance);
             return new Page<IDataController, UserControl>(dataView, dataController, "Data View");
         }
     }

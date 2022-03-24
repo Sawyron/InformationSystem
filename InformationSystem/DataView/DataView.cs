@@ -2,13 +2,15 @@
 {
     public partial class DataView : UserControl, IDataView
     {
+        private string _table = "";
         private HashSet<int> _updatedRows = new HashSet<int>();
+        private Dictionary<string, EventHandler> _tableHandlers = new Dictionary<string, EventHandler>();
         public DataView()
         {
             InitializeComponent();
         }
 
-        public string TableName => _tableTextBox.Text;
+        public string TableName => _table;
 
         public object DataSource { get => _dataGridView.DataSource; set => _dataGridView.DataSource = value; }
 
@@ -20,12 +22,6 @@
         {
             _dataGridView.Columns.Clear();
             TableSelected?.Invoke(this, EventArgs.Empty);
-            //_dataGridView.Columns.Add("State", string.Empty);
-            //foreach (DataGridViewRow row in _dataGridView.Rows)
-            //{
-            //    row.Cells["State"].Value = RowState.Existed;
-            //}
-            //_dataGridView.Columns["Updated"].Visible = false;
         }
 
         private void _dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -45,6 +41,40 @@
             }
             _updatedRows.Clear();
             TableUpdated?.Invoke(this, EventArgs.Empty);
+        }
+
+        public void LoadDataBases(IEnumerable<string> dataBases)
+        {
+            _databaseTree.BeginUpdate();
+            _databaseTree.Nodes.Clear();
+            TreeNode root = _databaseTree.Nodes.Add("Data Bases");
+            foreach (string db in dataBases)
+            {
+                root.Nodes.Add(db);
+            }
+            _databaseTree.EndUpdate();
+        }
+
+        public void LoadTables(string dataBase, IEnumerable<string> tables)
+        {
+            _tableTree.BeginUpdate();
+            _tableTree.Nodes.Clear();
+            TreeNode treeNode = _tableTree.Nodes.Add(dataBase);
+            foreach (string table in tables)
+            {
+                treeNode.Nodes.Add(table);
+            }
+            _tableTree.EndUpdate();
+        }
+
+        private void _tableTree_NodeMouseDoubleClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if (e.Node.Parent != null)
+            {
+                _table = e.Node.Text;
+                _tableTextBox.Text = _table;
+                TableSelected?.Invoke(this, EventArgs.Empty);
+            }
         }
     }
 }
