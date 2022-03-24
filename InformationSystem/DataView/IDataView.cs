@@ -10,5 +10,6 @@
         event EventHandler? TableSelected;
         event EventHandler? TableUpdated;
         event EventHandler<TableValueArgs>? ValueChanged;
+        event EventHandler? RowAdded;
     }
 }

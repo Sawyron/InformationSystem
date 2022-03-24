@@ -20,6 +20,12 @@ namespace InformationSystem.DataView
             _dataView.TableSelected += _dataView_TableSelected;
             _dataView.ValueChanged += _dataView_ValueChanged;
             _dataView.TableUpdated += _dataView_TableUpdated;
+            _dataView.RowAdded += _dataView_RowAdded;
+        }
+
+        private void _dataView_RowAdded(object? sender, EventArgs e)
+        {
+            _tableService.CreateRow();
         }
 
         private void _dataView_TableUpdated(object? sender, EventArgs e)

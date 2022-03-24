@@ -42,7 +42,9 @@ namespace InformationSystem.DataView
         {
             DataTable? dataTable = _dataSet.Tables[_table];
             if (dataTable != null)
+            {
                 dataTable.Rows[row][column] = value;
+            }
         }
 
         public int UpdateTable()
@@ -50,6 +52,16 @@ namespace InformationSystem.DataView
             if (_adapter == null)
                 throw new Exception("table is not set");
             return _adapter.Update(_dataSet, _table);
+        }
+
+        public void CreateRow()
+        {
+            DataTable? table = _dataSet.Tables[_table];
+            if (table != null)
+            {
+                table.Rows.Add();
+                table.Rows.RemoveAt(table.Rows.Count - 1);
+            }
         }
     }
 }

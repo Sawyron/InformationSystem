@@ -17,6 +17,7 @@
         public event EventHandler? TableSelected;
         public event EventHandler<TableValueArgs>? ValueChanged;
         public event EventHandler? TableUpdated;
+        public event EventHandler? RowAdded;
 
         private void _selectTableButton_Click(object sender, EventArgs e)
         {
@@ -76,6 +77,12 @@
                 _tableTextBox.Text = _table;
                 TableSelected?.Invoke(this, EventArgs.Empty);
             }
+        }
+
+        private void _dataGridView_UserAddedRow(object sender, DataGridViewRowEventArgs e)
+        {
+            RowAdded?.Invoke(this, EventArgs.Empty);
+            _dataGridView.Rows.RemoveAt(_dataGridView.Rows.Count - 2);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using InformationSystem.Models;
-using System.Data;
+﻿using System.Data;
 
 namespace InformationSystem.Services
 {
@@ -9,5 +8,6 @@ namespace InformationSystem.Services
         DataTable GetTable();
         void UpdateRow(int row, int column, object value);
         int UpdateTable();
+        void CreateRow();
     }
 }

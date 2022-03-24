@@ -45,7 +45,6 @@
             // 
             // _dataGridView
             // 
-            this._dataGridView.AllowUserToAddRows = false;
             this._dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this._dataGridView.Dock = System.Windows.Forms.DockStyle.Fill;
             this._dataGridView.Location = new System.Drawing.Point(0, 0);
@@ -54,6 +53,7 @@
             this._dataGridView.Size = new System.Drawing.Size(403, 286);
             this._dataGridView.TabIndex = 0;
             this._dataGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this._dataGridView_CellValueChanged);
+            this._dataGridView.UserAddedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this._dataGridView_UserAddedRow);
             // 
             // _controlPanel
             // 
