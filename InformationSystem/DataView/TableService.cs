@@ -63,5 +63,21 @@ namespace InformationSystem.DataView
                 table.Rows.RemoveAt(table.Rows.Count - 1);
             }
         }
+
+        public void DeleteRows(IEnumerable<int> rows)
+        {
+            DataTable? table = _dataSet.Tables[_table];
+            if (table != null) {
+                List<DataRow> dataRows = new List<DataRow>();
+                foreach (int row in rows)
+                {
+                    dataRows.Add(table.Rows[row]);
+                }
+                foreach (DataRow row in dataRows)
+                {
+                    row.Delete();
+                }
+            }
+        }
     }
 }

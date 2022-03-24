@@ -21,6 +21,12 @@ namespace InformationSystem.DataView
             _dataView.ValueChanged += _dataView_ValueChanged;
             _dataView.TableUpdated += _dataView_TableUpdated;
             _dataView.RowAdded += _dataView_RowAdded;
+            _dataView.DeleteClick += _dataView_DeleteClick;
+        }
+
+        private void _dataView_DeleteClick(object? sender, EventArgs e)
+        {
+            _tableService.DeleteRows(_dataView.SelectedRows);
         }
 
         private void _dataView_RowAdded(object? sender, EventArgs e)

@@ -14,10 +14,24 @@
 
         public object DataSource { get => _dataGridView.DataSource; set => _dataGridView.DataSource = value; }
 
+        public IEnumerable<int> SelectedRows
+        {
+            get
+            {
+                List<int> rows = new List<int>();
+                foreach (DataGridViewRow row in _dataGridView.SelectedRows)
+                {
+                    rows.Add(row.Index);
+                }
+                return rows;
+            }
+        }
+
         public event EventHandler? TableSelected;
         public event EventHandler<TableValueArgs>? ValueChanged;
         public event EventHandler? TableUpdated;
         public event EventHandler? RowAdded;
+        public event EventHandler? DeleteClick;
 
         private void _selectTableButton_Click(object sender, EventArgs e)
         {
@@ -83,6 +97,11 @@
         {
             RowAdded?.Invoke(this, EventArgs.Empty);
             _dataGridView.Rows.RemoveAt(_dataGridView.Rows.Count - 2);
+        }
+
+        private void _deleteButton_Click(object sender, EventArgs e)
+        {
+            DeleteClick?.Invoke(this, EventArgs.Empty);
         }
     }
 }

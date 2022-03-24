@@ -30,6 +30,7 @@
         {
             this._dataGridView = new System.Windows.Forms.DataGridView();
             this._controlPanel = new System.Windows.Forms.Panel();
+            this._deleteButton = new System.Windows.Forms.Button();
             this._updateButton = new System.Windows.Forms.Button();
             this._tableTextBox = new System.Windows.Forms.TextBox();
             this._tableLabel = new System.Windows.Forms.Label();
@@ -57,6 +58,7 @@
             // 
             // _controlPanel
             // 
+            this._controlPanel.Controls.Add(this._deleteButton);
             this._controlPanel.Controls.Add(this._updateButton);
             this._controlPanel.Controls.Add(this._tableTextBox);
             this._controlPanel.Controls.Add(this._tableLabel);
@@ -66,13 +68,23 @@
             this._controlPanel.Size = new System.Drawing.Size(645, 100);
             this._controlPanel.TabIndex = 1;
             // 
+            // _deleteButton
+            // 
+            this._deleteButton.Location = new System.Drawing.Point(134, 58);
+            this._deleteButton.Name = "_deleteButton";
+            this._deleteButton.Size = new System.Drawing.Size(100, 23);
+            this._deleteButton.TabIndex = 4;
+            this._deleteButton.Text = "Delete";
+            this._deleteButton.UseVisualStyleBackColor = true;
+            this._deleteButton.Click += new System.EventHandler(this._deleteButton_Click);
+            // 
             // _updateButton
             // 
             this._updateButton.Location = new System.Drawing.Point(13, 58);
             this._updateButton.Name = "_updateButton";
             this._updateButton.Size = new System.Drawing.Size(100, 23);
             this._updateButton.TabIndex = 3;
-            this._updateButton.Text = "Update";
+            this._updateButton.Text = "Save";
             this._updateButton.UseVisualStyleBackColor = true;
             this._updateButton.Click += new System.EventHandler(this._updateButton_Click);
             // 
@@ -158,5 +170,6 @@
         private Panel _dataPanel;
         private Panel _treePanel;
         private TreeView _tableTree;
+        private Button _deleteButton;
     }
 }
