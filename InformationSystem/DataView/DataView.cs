@@ -21,6 +21,7 @@
         private void _selectTableButton_Click(object sender, EventArgs e)
         {
             _dataGridView.Columns.Clear();
+            _updatedRows.Clear();
             TableSelected?.Invoke(this, EventArgs.Empty);
         }
 

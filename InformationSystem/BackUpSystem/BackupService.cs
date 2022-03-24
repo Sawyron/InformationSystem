@@ -21,27 +21,33 @@ namespace InformationSystem.BackupSystem
 
         private int ExecuteProcess(string fileName, string args)
         {
-            Process dump = new Process();
-            dump.StartInfo.FileName = fileName;
-            dump.StartInfo.Arguments = args;
-            dump.StartInfo.UseShellExecute = false;
-            dump.StartInfo.CreateNoWindow = true;
-            dump.Start();
-            dump.WaitForExit();
-            return dump.ExitCode;
+            Process process = new Process();
+            process.StartInfo.RedirectStandardError = true;
+            process.StartInfo.FileName = fileName;
+            process.StartInfo.Arguments = args;
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.CreateNoWindow = true;
+            process.Start();
+            string error = process.StandardError.ReadToEnd();
+            process.WaitForExit();
+            if (process.ExitCode != 0)
+            {
+                throw new Exception(error);
+            }
+            return process.ExitCode;
         }
         public int SaveDataBase(string file)
         {
             if (_connection == null)
                 throw new ConnectionIsNotSetException();
-            return ExecuteProcess(_binPath + @"\pg_dump.exe", $"{GetDbName()} -F c -f \"{file}\"");
+            return  ExecuteProcess(_binPath + @"\pg_dump.exe", $"{GetDbName()} -F c -f \"{file}\"");
         }
 
         public int RestoreDataBase(string file)
         {
             string fileName = _binPath + @"\pg_restore.exe";
             string args = $"{GetDbName()} -c -F c \"{file}\"";
-            return ExecuteProcess(fileName, args);
+            return  ExecuteProcess(fileName, args);
         }
     }
 }

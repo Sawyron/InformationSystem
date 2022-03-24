@@ -42,6 +42,11 @@
 
         private void _saveButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(Password))
+            {
+                MessageBox.Show("Password is not set", "Exclamination", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = "dump files (*.dump)|*.dump|All files (*.*.)|*.*";
             if (saveFileDialog.ShowDialog() == DialogResult.OK)
@@ -56,6 +61,11 @@
 
         private void _restoreButton_Click(object sender, EventArgs e)
         {
+            if (string.IsNullOrEmpty(Password))
+            {
+                MessageBox.Show("Password is not set", "Exclamination", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "dump files (*.dump)|*.dump|All files (*.*.)|*.*";
             if (openFileDialog.ShowDialog() == DialogResult.OK)

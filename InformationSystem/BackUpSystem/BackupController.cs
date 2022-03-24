@@ -23,7 +23,7 @@ namespace InformationSystem.BackupSystem
         private void _backupView_RestoreFileSelected(object? sender, EventArgs e)
         {
             _backupService.BinPath = _backupView.BinPath;
-            _backupService.Password = _backupService.Password;
+            _backupService.Password = _backupView.Password;
             try
             {
                 _backupService.RestoreDataBase(_backupView.RestoreFile);
