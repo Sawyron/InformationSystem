@@ -43,7 +43,8 @@ namespace InformationSystem.DataView
             DataTable? dataTable = _dataSet.Tables[_table];
             if (dataTable != null)
             {
-                dataTable.Rows[row][column] = value;
+                if (row >= 0 && row < dataTable.Rows.Count)
+                    dataTable.Rows[row][column] = value;
             }
         }
 
@@ -70,7 +71,8 @@ namespace InformationSystem.DataView
                 List<DataRow> dataRows = new List<DataRow>();
                 foreach (int row in rows)
                 {
-                    dataRows.Add(table.Rows[row]);
+                    if(row >= 0 && row < table.Rows.Count)
+                        dataRows.Add(table.Rows[row]);
                 }
                 foreach (DataRow row in dataRows)
                 {

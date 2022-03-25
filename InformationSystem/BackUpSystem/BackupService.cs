@@ -16,7 +16,9 @@ namespace InformationSystem.BackupSystem
         private string GetDbName()
         {
             OdbcConnectionStringBuilder builder = new OdbcConnectionStringBuilder(_connection?.ConnectionString);
-            return $"--dbname=postgresql://{builder["uid"]}:{Password}@{builder["server"]}:{builder["port"]}/{_connection?.Database}";
+            //return $"host={builder["server"]} port={builder["port"]} dbname={_connection?.Database} user={builder["uid"]} password={Password}";
+            string password = Password.Replace("@", "%40").Replace("$", "%24");
+            return $"--dbname=postgresql://{builder["uid"]}:{password}@{builder["server"]}:{builder["port"]}/{_connection?.Database}";
         }
 
         private int ExecuteProcess(string fileName, string args)
