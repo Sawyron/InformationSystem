@@ -13,5 +13,6 @@
         event EventHandler<TableValueArgs>? ValueChanged;
         event EventHandler? RowAdded;
         event EventHandler? DeleteClick;
+        event EventHandler<RowArgs>? RowDeleted;
     }
 }

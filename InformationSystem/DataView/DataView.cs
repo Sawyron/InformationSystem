@@ -32,16 +32,11 @@
         public event EventHandler? TableUpdated;
         public event EventHandler? RowAdded;
         public event EventHandler? DeleteClick;
-
-        private void _selectTableButton_Click(object sender, EventArgs e)
-        {
-            _dataGridView.Columns.Clear();
-            _updatedRows.Clear();
-            TableSelected?.Invoke(this, EventArgs.Empty);
-        }
+        public event EventHandler<RowArgs>? RowDeleted;
 
         private void _dataGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
+            _deleteButton.Enabled = false;
             int row = e.RowIndex;
             int col = e.ColumnIndex;
             _updatedRows.Add(row);
@@ -50,6 +45,7 @@
 
         private void _updateButton_Click(object sender, EventArgs e)
         {
+            _deleteButton.Enabled = true;
             _dataGridView.ClearSelection();
             foreach (int row in _updatedRows)
             {
@@ -57,6 +53,7 @@
             }
             _updatedRows.Clear();
             TableUpdated?.Invoke(this, EventArgs.Empty);
+            TableSelected?.Invoke(this, EventArgs.Empty);
         }
 
         public void LoadDataBases(IEnumerable<string> dataBases)
@@ -87,6 +84,10 @@
         {
             if (e.Node.Parent != null)
             {
+                _dataGridView.Columns.Clear();
+                _updatedRows.Clear();
+                _deleteButton.Enabled = true;
+                _updateButton.Enabled = true;
                 _table = e.Node.Text;
                 _tableTextBox.Text = _table;
                 TableSelected?.Invoke(this, EventArgs.Empty);
@@ -97,6 +98,7 @@
         {
             RowAdded?.Invoke(this, EventArgs.Empty);
             _dataGridView.Rows.RemoveAt(_dataGridView.Rows.Count - 2);
+            RowDeleted?.Invoke(this, new RowArgs(_dataGridView.Rows.Count - 2));
         }
 
         private void _deleteButton_Click(object sender, EventArgs e)

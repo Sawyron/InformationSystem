@@ -60,7 +60,6 @@ namespace InformationSystem.DataView
             if (table != null)
             {
                 table.Rows.Add();
-                table.Rows.RemoveAt(table.Rows.Count - 1);
             }
         }
 
@@ -78,6 +77,11 @@ namespace InformationSystem.DataView
                     row.Delete();
                 }
             }
+        }
+
+        public void DeleteRow(int row)
+        {
+            _dataSet.Tables[_table]?.Rows[row].Delete();
         }
     }
 }

@@ -70,6 +70,7 @@
             // 
             // _deleteButton
             // 
+            this._deleteButton.Enabled = false;
             this._deleteButton.Location = new System.Drawing.Point(134, 58);
             this._deleteButton.Name = "_deleteButton";
             this._deleteButton.Size = new System.Drawing.Size(100, 23);
@@ -80,6 +81,7 @@
             // 
             // _updateButton
             // 
+            this._updateButton.Enabled = false;
             this._updateButton.Location = new System.Drawing.Point(13, 58);
             this._updateButton.Name = "_updateButton";
             this._updateButton.Size = new System.Drawing.Size(100, 23);

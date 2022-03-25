@@ -9,6 +9,7 @@ namespace InformationSystem.Services
         void UpdateRow(int row, int column, object value);
         int UpdateTable();
         void CreateRow();
+        void DeleteRow(int row);
         void DeleteRows(IEnumerable<int> rows);
     }
 }
