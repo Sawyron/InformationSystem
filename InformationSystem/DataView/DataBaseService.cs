@@ -9,7 +9,7 @@ namespace InformationSystem.DataView
         private IDbConnection? _connection;
         public IDbConnection? DbConnection { get => _connection; set => _connection = value; }
 
-        public string? Table => _connection?.Database;
+        public string? DataBase => _connection?.Database;
 
         private OdbcDataAdapter GetDataAdapter(string query)
         {

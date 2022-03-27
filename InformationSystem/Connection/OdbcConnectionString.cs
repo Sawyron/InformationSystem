@@ -21,7 +21,7 @@
 
         public string GetConnectionString()
         {
-            return $"Driver={{PostgreSQL Unicode}};Server={Server};Port={Port};Database={DataBase};UID={User};PWD={Password}";
+            return $"Driver={{PostgreSQL ODBC Driver(UNICODE)}};Server={Server};Port={Port};Database={DataBase};UID={User};PWD={Password}";
         }
     }
 }

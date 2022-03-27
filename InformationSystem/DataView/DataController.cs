@@ -77,10 +77,10 @@ namespace InformationSystem.DataView
             try
             {
                 _dataView.LoadDataBases(_dataBaseService.GetDataBases());
-                string? table = _dataBaseService.Table;
-                if (table != null)
+                string? dataBase = _dataBaseService.DataBase;
+                if (dataBase != null)
                 {
-                    _dataView.LoadTables(table, _dataBaseService.GetTables());
+                    _dataView.LoadTables(dataBase, _dataBaseService.GetTables());
                 }
             }
             catch (Exception ex)

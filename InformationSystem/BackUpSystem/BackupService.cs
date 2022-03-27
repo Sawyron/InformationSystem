@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.Odbc;
 using System.Diagnostics;
+using System.Text.Encodings.Web;
 
 namespace InformationSystem.BackupSystem
 {
@@ -11,14 +12,19 @@ namespace InformationSystem.BackupSystem
         private string _binPath = "";
         public IDbConnection? DbConnection { get => _connection; set => _connection = value; }
         public string BinPath { get => _binPath; set => _binPath = value; }
-        public string Password { get; set; } = "";
-
+        public string Password { get; set; } = @"C:\Program Files\PostgreSQL\13\bin";
         private string GetDbName()
         {
             OdbcConnectionStringBuilder builder = new OdbcConnectionStringBuilder(_connection?.ConnectionString);
-            //return $"host={builder["server"]} port={builder["port"]} dbname={_connection?.Database} user={builder["uid"]} password={Password}";
-            string password = Password.Replace("@", "%40").Replace("$", "%24");
-            return $"--dbname=postgresql://{builder["uid"]}:{password}@{builder["server"]}:{builder["port"]}/{_connection?.Database}";
+            string password = Uri.EscapeDataString(Password);
+            string dbname = _connection?.Database ?? "";
+            dbname = Uri.EscapeDataString(dbname);
+            string user = builder["uid"].ToString() ?? "";
+            user = Uri.EscapeDataString(user);
+            string host = builder["server"].ToString() ?? "";
+            host = Uri.EscapeDataString(host);
+            string test = Uri.EscapeDataString("%abc@$#^?+=,/<>|");
+            return $"--dbname=postgresql://{user}:{password}@{host}:{builder["port"]}/{dbname}";
         }
 
         private int ExecuteProcess(string fileName, string args)

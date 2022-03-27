@@ -6,6 +6,6 @@ namespace InformationSystem.DataView
     {
         public IEnumerable<string> GetDataBases();
         public IEnumerable<string> GetTables();
-        public string? Table { get; }
+        public string? DataBase { get; }
     }
 }
